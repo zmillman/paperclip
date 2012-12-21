@@ -4,7 +4,9 @@ rvm:
   - jruby-19mode
   - rbx-19mode
 
+before_install: "gem install bundler"
 before_script: "sudo ntpdate -ub ntp.ubuntu.com pool.ntp.org; true"
+
 script: "bundle exec rake clean test cucumber"
 
 gemfile:
