@@ -172,13 +172,7 @@ module Paperclip
     #     end
     #   end
     def has_attached_file(name, options = {})
-      if attachment_definitions.nil?
-        self.attachment_definitions = {}
-      else
-        self.attachment_definitions = self.attachment_definitions.dup
-      end
-
-      options = attachment_definitions[name] = Paperclip::AttachmentOptions.new(options)
+      options = Paperclip::AttachmentOptions.new(options)
       Paperclip.classes_with_attachments << self.name
       Paperclip.check_for_path_clash(name, options[:path], self.name)
 
@@ -218,12 +212,6 @@ module Paperclip
         attachment = record.send(name)
         attachment.send(:flush_errors)
       end
-    end
-
-    # Returns the attachment definitions defined by each call to
-    # has_attached_file.
-    def attachment_definitions
-      self.attachment_definitions
     end
   end
 end
