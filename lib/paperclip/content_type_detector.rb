@@ -50,7 +50,7 @@ module Paperclip
     end
 
     def type_from_file_command
-      FileCommandContentTypeDetector.new(@filename).detect
+      @type_from_file_command ||= FileCommandContentTypeDetector.new(@filename).detect
     end
 
   end
