@@ -44,8 +44,9 @@ module Paperclip
     end
 
     def best_type_match
+      types_matching_file = possible_types.select {|type| type.content_type == type_from_file_command}
       official_types = possible_types.reject {|type| type.content_type.match(/\/x-/) }
-      (official_types.first || possible_types.first).content_type
+      (types_matching_file.first || official_types.first || possible_types.first).content_type
     end
 
     def type_from_file_command
